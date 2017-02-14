@@ -1,9 +1,10 @@
-<h1><%= @employee["first_name"] %> <%= @employee["last_name"] %></h1>
-<h2>Email: <%= @employee["email"] %></h2>
-<h4>Addresses: </h4>
-<% @employee["addresses"].each do |address| %>
-  <p><%= address["address_1"] %></p>
-  <p><%= address["address_2"] %></p>
-  <p><%= address["city"] %>, <%= address["state"] %> <%= address["zip"] %></p>
-  <br>
-<% end %>
+<h1><%= @employee.first_name %> <%= @employee.last_name %></h1>
+<h2>Email: <%= @employee.email %></h2>
+
+
+<%= link_to "Edit", "/employees/#{@employee.id}/edit" %>
+<%= link_to "Delete", "/employees/#{@employee.id}", method: :delete %>
+
+
+
+

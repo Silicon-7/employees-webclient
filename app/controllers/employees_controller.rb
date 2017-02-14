@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
 
   def index
-    @employees = Unirest.get("http://localhost:3000/api/v1/employees.json").body
+    @employees = Unirest.get("#{ ENV['API_HOST_URL'] }/api/v1/employees.json").body
   end
 
   def new
@@ -10,7 +10,7 @@ class EmployeesController < ApplicationController
 
   def create
     @employee = Unirest.post(
-                            "http://localhost:3000/api/v1/employees",
+                            "#{ ENV['API_HOST_URL'] }/api/v1/employees",
                             headers: {
                                       "Accept" => "application/json"
                                       },
@@ -25,6 +25,45 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    @employee = Unirest.get("http://localhost:3000/api/v1/employees/#{params[:id]}.json").body
+    @employee = Employee.new(Unirest.get("#{ ENV['API_HOST_URL'] }/api/v1/employees/#{params[:id]}.json").body)
+  end
+
+  def edit
+    @employee = Unirest.get("#{ ENV['API_HOST_URL'] }/api/v1/employees/#{params[:id]}.json").body
+  end
+
+  def update
+    @employee = Unirest.patch(
+                              "#{ ENV['API_HOST_URL'] }/api/v1/employees/#{params[:id]}",
+                              headers: {
+                                        "Accept" => "application/json"
+                                        },
+                              parameters: {
+                                           first_name: params[:first_name],
+                                           last_name: params[:last_name],
+                                           email: params[:email]
+                                           }
+                              ).body
+
+    redirect_to "/employees/#{@employee["id"]}"
+  end
+
+  def destroy
+    @employee = Unirest.delete(
+                              "#{ ENV['API_HOST_URL'] }/api/v1/employees/#{params[:id]}",
+                              headers: {
+                                        "Accept" => "application/json"
+                                        }
+                              ).body
+    redirect_to '/employees'
   end
 end
+
+
+
+
+
+
+
+
+
