@@ -1,17 +1,3 @@
-<h1>Update Employee</h1>
+<%= render "form", title: "Update", url: "/employees/#{@employee.id}", verb: :patch %>
 
-<%= form_tag "/employees/#{@employee['id']}", method: :patch do %>
-  <div>
-    <%= label_tag :first_name %>
-    <%= text_field_tag :first_name, @employee['first_name'] %>
-  </div>
-  <div>
-    <%= label_tag :last_name %>
-    <%= text_field_tag :last_name, @employee['last_name'] %>
-  </div>
-  <div>
-    <%= label_tag :email %>
-    <%= text_field_tag :email, @employee['email'] %>
-  </div>
-  <%= submit_tag "Update Employee" %>
-<% end %>
+
