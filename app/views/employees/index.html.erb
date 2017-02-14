@@ -1,4 +1,4 @@
 <% @employees.each do |employee| %>
-  <h1><a href="/employees/<%= employee['id'] %>"><%= employee["first_name"] %> <%= employee["last_name"] %></a></h1>
-  <h2>Email: <%= employee["email"] %></h2>
+  <h1><a href="/employees/<%= employee.id %>"><%= employee.full_name %></a></h1>
+  <h2>Email: <%= employee.email %></h2>
 <% end %>

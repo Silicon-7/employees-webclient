@@ -6,6 +6,14 @@ class Employee
     @first_name = hash["first_name"]
     @last_name = hash["last_name"]
     @email = hash["email"]
-    @birthday = hash["birthday"]
+    @birthday = Date.parse(hash["birthday"])
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def friendly_birthday
+    birthday.strftime('%b %d, %Y')
   end
 end
